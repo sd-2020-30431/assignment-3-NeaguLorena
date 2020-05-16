@@ -20,10 +20,8 @@
     </button>
   </form>
 
-  <h2 style="color: darkred">
-    <td *ngIf="reminder">
-      {{reminder}}</td>
-  </h2>
+    <h2 class="alert alert-danger"
+    [ngStyle]="{'background-color': reminder}"> {{reminder=='red'?'Waste levels are too high!':'Goal reached!'}}</h2>
 
   <table style="width:50%;text-align:left;margin-left:0px;margin-bottom:20px;">
     <tr>

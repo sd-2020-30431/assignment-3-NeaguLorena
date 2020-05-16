@@ -1,7 +1,8 @@
-package com.assignment3.wasteless.Bussiness.Service;
+package com.assignment3.wasteless.Bussiness.Service.Query;
 
 import com.assignment3.wasteless.Data.Repository.GroceryListItemRepository;
 import com.assignment3.wasteless.Data.Repository.GroceryListRepository;
+import com.assignment3.wasteless.Decorator.*;
 import com.assignment3.wasteless.Presentation.Model.*;
 import com.assignment3.wasteless.Presentation.Model.Goal;
 import com.assignment3.wasteless.Presentation.Model.GroceryList;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ReminderService {
+public class ReminderQueryService {
 
     @Autowired
     private GroceryListRepository groceryListRepository;
@@ -42,11 +43,11 @@ public class ReminderService {
             sum_goals += item.getCalorieValue() / daysUntilExpiration;
         }
         if (sum_goals > goal.getNumberOfCaloriesADay()) {
-            return "Waste levels are too high!";
+            Color redColor = new RedColorDecorator(new RedColor());
+            return redColor.setColor("red");
         } else {
-            return "Goal reached!";
+            Color greenColor = new GreenColorDecorator(new GreenColor());
+            return greenColor.setColor("green");
         }
     }
-
-
 }

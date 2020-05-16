@@ -1,6 +1,6 @@
 package com.assignment3.wasteless.Presentation.Controller;
 
-import com.assignment3.wasteless.Bussiness.Service.ReminderService;
+import com.assignment3.wasteless.Bussiness.Service.Query.ReminderQueryService;
 import com.assignment3.wasteless.Bussiness.Service.UserService;
 import com.assignment3.wasteless.Data.Repository.GoalRepository;
 import com.assignment3.wasteless.Presentation.Model.Goal;
@@ -14,11 +14,11 @@ import java.util.List;
 public class GoalController {
 
     private final GoalRepository goalRepository;
-    private final ReminderService reminderService;
+    private final ReminderQueryService reminderQueryService;
 
-    public GoalController(GoalRepository goalRepository, ReminderService reminderService) {
+    public GoalController(GoalRepository goalRepository, ReminderQueryService reminderQueryService) {
         this.goalRepository = goalRepository;
-        this.reminderService = reminderService;
+        this.reminderQueryService = reminderQueryService;
     }
 
     @PostMapping("/goal")
@@ -26,7 +26,6 @@ public class GoalController {
         goal.setUsername(UserService.getLoggedUser().getUsername());
         goal.setDay(new Date());
         return goalRepository.save(goal);
-//        return "redirect:/groceryLists-user";
     }
 
     @GetMapping("/goal")
@@ -41,7 +40,7 @@ public class GoalController {
         List<Goal> goals = goalRepository.getAllByUsername(UserService.getLoggedUser().getUsername());
         Goal g = goals.get(goals.size() - 1);
         if (g != null)
-            message = reminderService.getReminder(UserService.getLoggedUser().getUsername(), g);
+            message = reminderQueryService.getReminder(UserService.getLoggedUser().getUsername(), g);
         else message = "No goal set yet!";
         return message;
     }

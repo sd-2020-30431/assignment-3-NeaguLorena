@@ -31,8 +31,6 @@ public class Mediator implements ApplicationContextAware {
         mapRequestToHandler.put(GetGroceryListItemsQuery.class, GetGroceryListItemsQueryHandler.class);
         mapRequestToHandler.put(CreateGroceryListItemCommand.class, CreateGroceryListItemCommandHandler.class);
         mapRequestToHandler.put(DeleteGroceryListItemCommand.class, DeleteGroceryListItemCommandHandler.class);
-//        handlerMapper.put(CreateGoalCommand.class, CreateGoalCommandHandler.class);
-//        handlerMapper.put(ReadReportQuery.class, ReadReportQueryHandler.class);
     }
 
     @Override
